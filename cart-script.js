@@ -46,6 +46,44 @@ let gameTemp = ''
 let hargaTemp = 0
 let picTemp
 
+function klikCart(){
+    document.getElementById("cartContainer").style.display = "block"
+    document.getElementById("landingPage").style.display = "none"
+    document.getElementById("checkoutContainer").style.display = "none"
+    document.getElementById("libraryContainer").style.display = "none"
+    document.getElementById("finishingPage").style.display = "none"
+}
+function klikHome(){
+    document.getElementById("landingPage").style.display = "block"
+    document.getElementById("cartContainer").style.display = "none"
+    document.getElementById("checkoutContainer").style.display = "none"
+    document.getElementById("libraryContainer").style.display = "none"
+    document.getElementById("finishingPage").style.display = "none"
+}
+
+function klikCheckout(){
+    document.getElementById("checkoutContainer").style.display = "block"
+    document.getElementById("cartContainer").style.display = "none"
+    document.getElementById("libraryContainer").style.display = "none"
+    document.getElementById("landingPage").style.display = "none"
+    document.getElementById("finishingPage").style.display = "none"
+}
+
+function klikFinishing(){
+    document.getElementById("finishingPage").style.display = "block"
+    document.getElementById("landingPage").style.display = "none"
+    document.getElementById("checkoutContainer").style.display = "none"
+    document.getElementById("libraryContainer").style.display = "none"
+    document.getElementById("cartContainer").style.display = "none"
+}
+function klikLibrary(){
+    document.getElementById("libraryContainer").style.display = "block"
+    document.getElementById("finishingPage").style.display = "none"
+    document.getElementById("landingPage").style.display = "none"
+    document.getElementById("checkoutContainer").style.display = "none"
+    document.getElementById("cartContainer").style.display = "none"
+}
+
 
 function insertNewRecord() {
     var table = document.getElementById("tabel").getElementsByTagName('tbody')[0];
@@ -55,7 +93,7 @@ function insertNewRecord() {
     cell2 = newRow.insertCell(1);
     cell2.innerHTML = gameTemp;
     cell3 = newRow.insertCell(2);
-    cell3.innerHTML = hargaTemp;
+    cell3.innerHTML = `Rp ${moneyFormatter(hargaTemp)}`;
     cell4 = newRow.insertCell(3);
     cell4.innerHTML = 1;
     cell5 = newRow.insertCell(4);
@@ -98,7 +136,7 @@ function buyMhw() {
     var input = 'Monster Hunter World'
     var inputHarga = 700000   
     containerHarga.push(inputHarga)
-    let pic = "https://i.redd.it/wz8f2zzgvrr21.jpg"
+    let pic = "https://gamehero.co.za/wp-content/uploads/2019/06/monster-hunter-world-cover.jpg"
     hargaTemp = inputHarga
     gameTemp = input
     piceTemp = pic
@@ -147,6 +185,27 @@ function onDelete(td) {
 }
 let hargaTotal = 0
 function totalHarga(){
-    document.getElementById("total").innerHTML = `Total = ${containerHarga.reduce((a, b) => a + b, 0)}`
+    document.getElementById("total").innerHTML = `Total = Rp ${moneyFormatter(containerHarga.reduce((a, b) => a + b, 0))}`
 }
 let containerHarga = []
+
+function moneyFormatter(money) {
+    let uang = money.toString()
+    let uangNew = ''
+    let count = 0
+    for (let i = uang.length-1; i >= 0; i--) {
+      const angka = uang[i];
+      count++
+      uangNew += angka
+      if(count%3 === 0 && i!==0){
+        uangNew += '.'
+      }
+      
+    }
+    let uangNew2 = ''
+    for (let i = uangNew.length-1; i >= 0; i--) {
+      const angka = uangNew[i];
+      uangNew2+=angka
+    }
+    return uangNew2
+  }
